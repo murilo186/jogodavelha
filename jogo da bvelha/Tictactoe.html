@@ -1,0 +1,230 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" href="jogodavelhja.css"
+  
+  </head>
+
+  <header>
+ <h1>JOGO DA VELHA</h1>
+  </header>
+     
+  
+
+  <body>
+
+   
+    <script>
+      document.write("<div class='titulo' id='turno'><br>Selecione quem começa<br>")
+  
+      document.write("<img src='x.png' id='xzin' class='chill' width='100' height='100' onclick='selecao("+ '1' +")'>")
+  
+      document.write("<img src='circle.png' class='chill' id='cir' width='100' height='100' onclick='selecao("+ '2' +")'>")
+      </script>
+
+   <form name="frm">
+    <script>
+    document.write("<table border>")
+
+    var i, j, tabela, vitoria;
+    tabela = new Array(9);
+
+    for (i = 0; i<9; i++)
+    {
+      if((i%3) == 0)
+       {
+       document.write("<tr>")
+       tabela[i] = 0;
+       document.write("<td align='center'>");
+       document.write("<img id='b" + i + "' width='150' height='150' class='clean' src='cinza.png'  onclick='play("+ i +")'>");
+       }
+       else
+       {
+       tabela[i] = 0;
+       document.write("<td align='center'>");
+       document.write("<img id='b" + i + "' width='150' height='150' class='clean' src='cinza.png'  onclick='play("+ i +")'>");
+       }
+    }
+    document.write("</table>")
+    document.write("<input type='button' id='restart' value='Restart'class='clean' src='cinza.png' onclick='reiniciar()'>");
+
+    function reiniciar()
+    {
+      document.getElementById('xzin').setAttribute("onclick","selecao("+ '1' +")");
+      document.getElementById('cir').setAttribute("onclick","selecao("+ '2' +")");
+
+      document.getElementById('cir').setAttribute("class","chill")
+      document.getElementById('xzin').setAttribute("class","chill");
+
+      jogadas = 0;
+      escolha = 0;
+      document.getElementById("vit").innerHTML = "";
+      
+
+      for (j = 0; j<9; j++)
+      {
+        tabela[j] = 0;
+        document.getElementById("b"+j).setAttribute("src", "cinza.png");
+        document.getElementById("b"+j).setAttribute("onclick","play("+ j +")");
+        document.getElementById("b"+j).setAttribute("class","clean");
+      }
+    }
+    </script>
+    </form>
+       <script>
+        var escolha, jogadas;
+        jogadas = 0;
+    
+        function selecao(qual)
+        {
+          document.getElementById('xzin').setAttribute("onclick","");
+          document.getElementById('cir').setAttribute("onclick","");
+    
+          if(qual == '1')
+          {
+          escolha = 1;
+          document.getElementById('cir').setAttribute("class","chill")
+          document.getElementById('xzin').setAttribute("class","norm");
+          }
+          else 
+          {
+          escolha = 2;
+          document.getElementById('xzin').setAttribute("class","chill")
+          document.getElementById('cir').setAttribute("class","norm")
+          }
+        }
+        
+    
+        function play(i)
+        {
+        if (escolha == 1)
+        {
+        tabela[i] = 1;
+        jogadas = jogadas + 1
+        document.getElementById("b"+i).setAttribute("src","x.png");
+        document.getElementById("b"+i).setAttribute("onclick","");
+        escolha = 1;
+        document.getElementById('xzin').setAttribute("class","chill")
+        document.getElementById('cir').setAttribute("class","norm")
+    
+        if(tabela[0] == tabela[1] && tabela[1] == tabela[2] && tabela[2] == 1)
+        {
+        document.getElementById("vit").innerHTML = "O 'Corinthians' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[3] == tabela[4] && tabela[4] == tabela[5] && tabela[5] == 1)
+        {
+        document.getElementById("vit").innerHTML = "O 'Corinthians' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[6] == tabela[7] && tabela[7] == tabela[8] && tabela[8] == 1)
+        {
+        document.getElementById("vit").innerHTML = "O 'Corinthians' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[0] == tabela[3] && tabela[3] == tabela[6] && tabela[6] == 1)
+        {
+        document.getElementById("vit").innerHTML = "O 'Corinthians' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[1] == tabela[4] && tabela[4] == tabela[7] && tabela[7] == 1)
+        {
+        document.getElementById("vit").innerHTML = "O 'Corinthians' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[2] == tabela[5] && tabela[5] == tabela[8] && tabela[8] == 1)
+        {
+        document.getElementById("vit").innerHTML = "O 'Corinthians' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[0] == tabela[4] && tabela[4] == tabela[8] && tabela[8] == 1)
+        {
+        document.getElementById("vit").innerHTML = "O 'Corinthians' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[2] == tabela[4] && tabela[4] == tabela[6] && tabela[6] == 1)
+        {
+        document.getElementById("vit").innerHTML = "O 'Corinthians' ganhou";
+        escolha = 0;
+        }
+        else if(jogadas == 9)
+        {
+        document.getElementById("vit").innerHTML = "Empate";
+        escolha = 0;
+        }
+        else
+        {
+        escolha = 2;
+        }
+        }
+    
+    
+    
+        else if (escolha == 2)
+        {
+        tabela[i] = 2;
+        jogadas = jogadas + 1
+        document.getElementById("b"+i).setAttribute("src","circle.png");
+        document.getElementById("b"+i).setAttribute("onclick","");
+        document.getElementById('cir').setAttribute("class","chill")
+        document.getElementById('xzin').setAttribute("class","norm");
+        
+    
+        
+    
+        if(tabela[0] == tabela[1] && tabela[1] == tabela[2] && tabela[2] == 2)
+        {
+        document.getElementById("vit").innerHTML = "O 'Palmeiras' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[3] == tabela[4] && tabela[4] == tabela[5] && tabela[5] == 2)
+        {
+        document.getElementById("vit").innerHTML = "O 'Palmeiras' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[6] == tabela[7] && tabela[7] == tabela[8] && tabela[8] == 2)
+        {
+        document.getElementById("vit").innerHTML = "O 'Palmeiras' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[0] == tabela[3] && tabela[3] == tabela[6] && tabela[6] == 2)
+        {
+        document.getElementById("vit").innerHTML = "O 'Palmeiras' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[1] == tabela[4] && tabela[4] == tabela[7] && tabela[7] == 2)
+        {
+        document.getElementById("vit").innerHTML = "O 'Palmeiras' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[2] == tabela[5] && tabela[5] == tabela[8] && tabela[8] == 2)
+        {
+        document.getElementById("vit").innerHTML = "O 'Palmeiras' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[0] == tabela[4] && tabela[4] == tabela[8] && tabela[8] == 2)
+        {
+        document.getElementById("vit").innerHTML = "O 'Palmeiras' ganhou";
+        escolha = 0;
+        }
+        else if(tabela[2] == tabela[4] && tabela[4] == tabela[6] && tabela[6] == 2)
+        {
+        document.getElementById("vit").innerHTML = "O 'Palmeiras' ganhou";
+        escolha = 0;
+        }
+        else if(jogadas == 9)
+        {
+        document.getElementById("vit").innerHTML = "Empate";
+        escolha = 0;
+        }
+        else
+        escolha = 1;
+        }
+        }
+        </script>
+
+
+
+    <p id="vit"></p>
+  </body>
+</html>
